@@ -1,8 +1,6 @@
-import {createRoot} from 'react-dom/client'
-import React, { Suspense } from 'react';
+import { createRoot } from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { About } from '@/pages/about';
-import { Shop } from '@/pages/shop';
+
 import { App } from '@/components/App/App';
 
 const root = document.getElementById('root');
@@ -19,14 +17,14 @@ const router = createBrowserRouter([
         element: 
                 <App/>,
         children: [
-            {
-                path: "/about",
-                element: <About/>,
-            },
-            {
-                path: "/shop",
-                element: <Shop/>,
-            }
+            // {
+            //     path: "/about",
+            //     element: <About/>,
+            // },
+            // {
+            //     path: "/shop",
+            //     element: <Shop/>,
+            // }
         ]
     }
 ])
