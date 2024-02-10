@@ -5,6 +5,7 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import ReactRefreshPlugin from "@pmmmwh/react-refresh-webpack-plugin";
+import {EsbuildPlugin} from 'esbuild-loader'
 import path from "path";
 import CopyPlugin from 'copy-webpack-plugin'
 export function buildPlugins({mode, paths, analyzer, platform}: BuildOptions): Configuration['plugins'] {
@@ -17,6 +18,14 @@ export function buildPlugins({mode, paths, analyzer, platform}: BuildOptions): C
             template: paths.html,
             favicon: path.resolve(paths.public, 'favicon.svg')
         }),
+        new EsbuildPlugin({
+                define: {
+                    __PLATFORM__: JSON.stringify(platform),
+                    __MODE__: JSON.stringify(mode)
+                },
+                target: 'es2015',
+                css: isProd
+            }),
         new DefinePlugin({
             __PLATFORM__: JSON.stringify(platform),
             __MODE__: JSON.stringify(mode)

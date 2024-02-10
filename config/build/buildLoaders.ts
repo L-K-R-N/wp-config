@@ -62,23 +62,44 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
     //     exclude: /node_modules/,
     //   }
 
-    const tsLoader = {
-        test: /\.tsx?$/,
+    const esbuildLoader = {
+        test: /\.[jt]sx?$/,
         // ts-loader умеет работать с JSX
         // Если б мы не использовали ts, нужен был бы babel-loader
-        exclude: /node_modules/,
-        use: [
-            {
-                loader: 'ts-loader',
-                options: {
-                    transpileOnly: isDev,
-                    getCustomTransformers: () => ({
-                        before: [isDev && ReactRefreshTypeScript()].filter(Boolean)
-                    })
-                }
-            }
-        ]
+        // exclude: /node_modules/,
+        loader: 'esbuild-loader',
+        options: {
+            target: 'es2015'
+        }
+        // use: [
+        //     {
+        //         loader: 'ts-loader',
+        //         options: {
+        //             transpileOnly: isDev,
+        //             getCustomTransformers: () => ({
+        //                 before: [isDev && ReactRefreshTypeScript()].filter(Boolean)
+        //             })
+        //         }
+        //     }
+        // ]
       }
+
+    //   const tsLoader = {
+    //     test: /\.tsx?$/,
+
+    //     exclude: /node_modules/,
+    //     use: [
+    //         {
+    //             loader: 'ts-loader',
+    //             options: {
+    //                 transpileOnly: isDev,
+    //                 getCustomTransformers: () => ({
+    //                     before: [isDev && ReactRefreshTypeScript()].filter(Boolean)
+    //                 })
+    //             }
+    //         }
+    //     ]
+    //   }
 
       const babelLoader = buildBabelLoader(options)
     
@@ -86,7 +107,8 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
         assetLoader,
         scssLoader,
         // tsLoader,
-        babelLoader,
+        // babelLoader,
+        esbuildLoader,
         svgrLoader
     ]
 }
