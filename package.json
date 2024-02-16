@@ -9,10 +9,18 @@
       "build:prod": "webpack --env mode=production",
       "build:mobile": "webpack --env mode=production --env platform=mobile",
       "build:desktop": "webpack --env mode=production --env platform=desktop",
-      "prepare": "husky"
+      "prepare": "husky",
+      "lint": "eslint --debug src/",
+      "lint:write": "eslint --debug src/ --fix"
    },
    "lint-staged": {
       "**/*": "prettier --write --ignore-unknown"
+   },
+   "husky": {
+      "hooks": {
+         "pre-commit": "YOUR_COMMAND_HERE",
+         "pre-push": "YOUR_COMMAND_HERE"
+      }
    },
    "keywords": [],
    "author": "",
@@ -32,12 +40,19 @@
       "@types/webpack-dev-server": "^4.7.2",
       "@typescript-eslint/eslint-plugin": "^6.21.0",
       "@typescript-eslint/parser": "^6.21.0",
+      "babel-eslint": "^10.1.0",
       "babel-loader": "^9.1.3",
       "copy-webpack-plugin": "^11.0.0",
       "css-loader": "^6.8.1",
       "esbuild-loader": "^4.0.3",
       "eslint": "^8.56.0",
+      "eslint-config-airbnb": "^19.0.4",
+      "eslint-config-jest-enzyme": "^7.1.2",
       "eslint-config-prettier": "^9.1.0",
+      "eslint-plugin-babel": "^5.3.1",
+      "eslint-plugin-import": "^2.29.1",
+      "eslint-plugin-jest": "^27.6.3",
+      "eslint-plugin-jsx-a11y": "^6.8.0",
       "eslint-plugin-prettier": "^5.1.3",
       "eslint-plugin-react": "^7.33.2",
       "fork-ts-checker-webpack-plugin": "^9.0.0",
